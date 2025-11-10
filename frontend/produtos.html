@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Itens de Consumo - MVP</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container my-5">
+        <h2 id="tituloUsuario" class="mb-4"></h2>
+
+        <div class="card p-4 mb-4">
+            <h4>Adicionar item de consumo</h4>
+            <div class="row g-2">
+                <div class="col-md-4">
+                    <input type="text" id="nomeItem" class="form-control" placeholder="Nome do item">
+                </div>
+                <div class="col-md-2">
+                    <input type="number" id="quantidade" class="form-control" placeholder="Qtd total">
+                </div>
+                <div class="col-md-2">
+                    <input type="text" id="unidade" class="form-control" placeholder="Unidade">
+                </div>
+                <div class="col-md-2">
+                    <input type="number" id="consumo" class="form-control" placeholder="Consumo/dia">
+                </div>
+                <div class="col-md-2">
+                    <button id="btnAdicionar" class="btn btn-primary w-100">Adicionar</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" id="listaItens"></div>
+    </div>
+
+    <script src="produtos.js"></script>
+</body>
+</html>
