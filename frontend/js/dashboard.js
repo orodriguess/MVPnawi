@@ -21,7 +21,7 @@ async function init(){
   await carregarItens();
 }
 
-function renderProdutos(){
+async function renderProdutos(){
   produtoSelect.innerHTML = "<option value=''>Selecione...</option>";
   produtosBase.forEach(p=>{
     const opt = document.createElement("option");
@@ -34,6 +34,12 @@ function renderProdutos(){
 produtoSelect.addEventListener("change", ()=>{
   const produto = produtosBase.find(p=>p.id == produtoSelect.value);
   renderParametros(produto);
+});
+
+produtoSelect.addEventListener("click", ()=>{
+  if(produtoSelect.value === ""){
+    parametrosDiv.innerHTML = "";
+  }
 });
 
 function renderParametros(produto){
@@ -109,3 +115,5 @@ async function carregarItens(){
     tabelaBody.appendChild(tr);
   });
 }
+
+document.addEventListener("DOMContentLoaded", renderProdutos);

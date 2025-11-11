@@ -1,6 +1,6 @@
 from flask_restx import Namespace, Resource, fields
 from flask import request
-from backend.models.produto_base import ProdutoBase
+from backend.models.produtos_base import ProdutoBase
 from backend.services.calculadora import calcular_duracao_item
 
 api = Namespace("calculadora", description="Serviço de cálculo de duração de produtos")

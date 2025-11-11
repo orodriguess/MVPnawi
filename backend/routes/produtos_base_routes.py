@@ -1,5 +1,5 @@
 from flask_restx import Namespace, Resource, fields
-from backend.models.produto_base import ProdutoBase
+from backend.models.produtos_base import ProdutoBase
 
 api = Namespace('produtos_base', description='Lista de produtos suportados')
 

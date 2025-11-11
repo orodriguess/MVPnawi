@@ -1,7 +1,7 @@
 # backend/database/seed_produtos.py
 from backend.app import app
 from backend.database.config import db
-from backend.models.produto_base import ProdutoBase
+from backend.models.produtos_base import ProdutoBase
 import json
 
 def seed():

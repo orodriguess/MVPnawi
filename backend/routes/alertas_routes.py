@@ -1,7 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from backend.database.config import db
 from backend.models.item_usuario import ItemUsuario
-from backend.models.produto_base import ProdutoBase
+from backend.models.produtos_base import ProdutoBase
 from datetime import datetime, timedelta
 
 api = Namespace("alertas", description="Gera alertas de consumo próximo do fim")

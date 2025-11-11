@@ -4,7 +4,7 @@ from flask import request
 from backend.database.config import db
 from backend.models.item_usuario import ItemUsuario
 from backend.models.evento_consumo import EventoConsumo
-from backend.models.produto_base import ProdutoBase
+from backend.models.produtos_base import ProdutoBase
 from backend.services.calculadora import calcular_duracao_item 
 
 api = Namespace('itens_usuario', description='Itens do usuário (estoque e parâmetros)')

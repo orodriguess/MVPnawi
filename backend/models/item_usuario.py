@@ -1,5 +1,5 @@
 from backend.database.config import db
-from backend.models.produto_base import ProdutoBase
+from backend.models.produtos_base import ProdutoBase
 from backend.utils.unidades import normalizar_valor
 
 class ItemUsuario(db.Model):
