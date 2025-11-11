@@ -9,11 +9,10 @@
 <body>
 
   <!-- Cabeçalho fixo -->
-<header>
-  <h1>Nawi</h1>
-  <div id="userInfo"></div> <!-- Adicionado aqui -->
-</header>
-
+  <header>
+    <h1>Nawi</h1>
+    <div id="userInfo"></div>
+  </header>
 
   <!-- Conteúdo principal -->
   <main>
@@ -21,34 +20,25 @@
     <section id="cadastro-produto">
       <h2>Cadastrar Produto</h2>
 
-      <form id="form-produto">
-        <label for="produto">Produto Base</label>
-        <select id="produto" name="produto" required>
-          <option value="">Selecione...</option>
-        </select>
-        <div id="parametros"></div>
-        <label for="unidades">Unidades</label>
-        <input type="number" id="unidades" name="unidades" step="1" min="0">
+      <label for="produto">Produto Base</label>
+      <select id="produto" name="produto" required>
+        <option value="">Selecione...</option>
+      </select>
 
-        <label for="conteudo_por_unidade">Conteúdo por Unidade</label>
-        <input type="number" id="conteudo_por_unidade" name="conteudo_por_unidade" step="0.01" min="0">
+      <div id="parametros"></div>
 
-        <label for="consumo_diario">Consumo Diário</label>
-        <input type="number" id="consumo_diario" name="consumo_diario" step="0.01" min="0">
+      <div class="actions">
+        <button type="button" class="primary" id="btnSalvar">Salvar</button>
+        <button type="button" class="secondary" id="btnCalcular">Calcular Duração</button>
+      </div>
 
-        <div class="actions">
-          <button type="submit" class="primary">Salvar</button>
-          <button type="button" class="secondary" id="calcular-btn">Calcular Duração</button>
-        </div>
-      </form>
-
-      <div class="resultado" id="resultado"></div>
+      <div class="resultado" id="resultadoCalculo"></div>
     </section>
 
     <!-- Coluna da direita -->
     <section id="lista-produtos">
       <h2>Meus Produtos</h2>
-      <table id="tabela-produtos">
+      <table id="tabelaProdutos">
         <thead>
           <tr>
             <th>Nome</th>
