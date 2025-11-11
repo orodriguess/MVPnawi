@@ -1,7 +1,7 @@
 from flask_restx import Namespace, Resource, fields
 from flask import request
 from backend.database.config import db
-from backend.models.usuario import Usuario
+from backend.models.usuarios import Usuario
 
 api = Namespace('usuarios', description='Operações com usuários')
 

@@ -1,46 +1,36 @@
-# backend/models/item_usuario.py
 from backend.database.config import db
-from datetime import datetime
-import json
+from backend.models.produto_base import ProdutoBase
+from backend.utils.unidades import normalizar_valor
 
 class ItemUsuario(db.Model):
-    __tablename__ = 'itens_usuario'
+    __tablename__ = "itens_usuario"
 
     id = db.Column(db.Integer, primary_key=True)
-    usuario_id = db.Column(db.Integer, db.ForeignKey('usuarios.id'), nullable=True)
-    produto_base_id = db.Column(db.Integer, db.ForeignKey('produtos_base.id'), nullable=False)
+    nome = db.Column(db.String(100), nullable=False)
+    produto_base_id = db.Column(db.Integer, db.ForeignKey("produtos_base.id"), nullable=False)
+    quantidade_total = db.Column(db.Float, nullable=False)
+    unidade = db.Column(db.String(10), nullable=False)
+    pessoas = db.Column(db.Integer, default=1)
+    dias_estimados = db.Column(db.Float, nullable=True)
 
-    # parametros: livre (JSON) — ex: {"unidades":12,"metros_por_rolo":30,"consumo_diario":2}
-    parametros = db.Column(db.Text, nullable=False)
+    produto_base = db.relationship("ProdutoBase", backref=db.backref("itens_usuario", lazy=True))
 
-    quantidade = db.Column(db.Float, nullable=True)  # valor agregado (opcional)
-    unidade = db.Column(db.String(10), nullable=True)
+    def calcular_duracao(self):
+        """Calcula quanto tempo o item deve durar, com base na unidade e consumo médio."""
+        produto = self.produto_base
+        if not produto or not produto.consumo_medio_per_capita:
+            return None
 
-    estoque_atual = db.Column(db.Float, nullable=True)
-    consumo_estimado_diario = db.Column(db.Float, nullable=True)
+        # converte quantidade para unidade base
+        quantidade_normalizada, unidade_base = normalizar_valor(self.quantidade_total, self.unidade)
 
-    data_cadastro = db.Column(db.DateTime, default=datetime.utcnow)
-    data_validade = db.Column(db.DateTime, nullable=True)
-    ativo = db.Column(db.Boolean, default=True)
+        # só calcula se as unidades forem compatíveis
+        if unidade_base != produto.unidade_referencia:
+            raise ValueError(f"Incompatibilidade de unidade: {self.unidade} ≠ {produto.unidade_referencia}")
 
-    def get_parametros(self):
-        try:
-            return json.loads(self.parametros)
-        except Exception:
-            return {}
+        consumo_total_diario = produto.consumo_medio_per_capita * self.pessoas
+        if consumo_total_diario == 0:
+            return None
 
-    def to_dict(self):
-        p = self.get_parametros()
-        return {
-            "id": self.id,
-            "usuario_id": self.usuario_id,
-            "produto_base_id": self.produto_base_id,
-            "parametros": p,
-            "quantidade": self.quantidade,
-            "unidade": self.unidade,
-            "estoque_atual": self.estoque_atual,
-            "consumo_estimado_diario": self.consumo_estimado_diario,
-            "data_cadastro": self.data_cadastro.isoformat() if self.data_cadastro else None,
-            "data_validade": self.data_validade.isoformat() if self.data_validade else None,
-            "ativo": self.ativo
-        }
+        self.dias_estimados = round(quantidade_normalizada / consumo_total_diario, 1)
+        return self.dias_estimados

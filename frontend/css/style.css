@@ -1,0 +1,57 @@
+:root{
+  --bg: #f5f7fa;
+  --card: #ffffff;
+  --accent: #3498db;
+  --accent-600: #2980b9;
+  --muted: #7f8c8d;
+  --danger: #e74c3c;
+  --radius: 12px;
+  --font: "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%;margin:0;font-family:var(--font);background:var(--bg);-webkit-font-smoothing:antialiased}
+body{display:flex;align-items:center;justify-content:center;padding:24px}
+
+.login-container{
+  width:360px;
+  background:var(--card);
+  border-radius:var(--radius);
+  padding:28px;
+  box-shadow:0 8px 30px rgba(2,6,23,0.08);
+  text-align:center;
+}
+
+.title{margin:0 0 8px;font-size:22px;color:#2c3e50}
+.subtitle{margin:0 0 18px;color:var(--muted);font-size:14px}
+
+input[type="email"]{
+  width:100%;
+  padding:12px 14px;
+  border-radius:10px;
+  border:1px solid #e6e9ee;
+  outline:none;
+  font-size:15px;
+  margin-bottom:14px;
+}
+
+input[type="email"]:focus{box-shadow:0 0 0 4px rgba(52,152,219,0.08);border-color:var(--accent)}
+
+button#btnEntrar{
+  display:block;
+  width:100%;
+  padding:11px 14px;
+  border-radius:10px;
+  background:var(--accent);
+  color:#fff;
+  border:none;
+  font-size:15px;
+  cursor:pointer;
+  transition:transform .08s ease,background .12s;
+}
+
+button#btnEntrar:hover{background:var(--accent-600);transform:translateY(-1px)}
+button#btnEntrar:active{transform:translateY(0)}
+
+.error{color:var(--danger);min-height:18px;margin-bottom:8px;font-size:13px}
+.small{margin-top:14px;color:var(--muted);font-size:13px}
